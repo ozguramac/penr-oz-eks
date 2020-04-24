@@ -1,11 +1,12 @@
-#
-# Provider Configuration
-#
 provider "aws" {
-  region = "us-east-1"
-  version = ">= 2.38.0"
+  region  = var.aws_region
+  version = "~> 2.58"
 }
 
-data "aws_region" "current" {}
+provider "external" {
+  version = "~> 1.2"
+}
 
-data "aws_availability_zones" "available" {}
+provider "http" {
+  version = "~> 1.2"
+}
