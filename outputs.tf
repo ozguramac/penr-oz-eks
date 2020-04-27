@@ -1,7 +1,5 @@
-data "http" "discover-external-ip" {
-  url = "http://ipv4.icanhazip.com"
-}
-
-locals {
-  accessing_computer_ip = chomp(data.http.discover-external-ip.body)
+# run `terraform output kubeconfig > ~/.kube/config` to use it for kubectl
+output "kubeconfig" {
+  description = "generate KUBECONFIG as output to save in ~/.kube/config locally"
+  value = module.eks.kubeconfig
 }

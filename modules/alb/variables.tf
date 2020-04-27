@@ -18,22 +18,17 @@ variable "hosted_zone_url" {
   type = string
 }
 
-variable "gateway_subnet_ids" {
-  description = "List containing the IDs of all created gateway subnets."
+variable "subnet_ids" {
+  description = "List containing the IDs of all created public subnets."
   type = list(string)
-}
-
-variable "lb_target_group_arn" {
-  description = "ARN of the Target Group pointing at the Kubernetes nodes."
-  type = string
-}
-
-variable "node_sg_id" {
-  description = "ID of the Security Group used by the Kubernetes worker nodes."
-  type = string
 }
 
 variable "vpc_id" {
   description = "VPC id"
+  type = string
+}
+
+variable "worker_sg_id" {
+  description = "ID of the Security Group used by the Kubernetes worker nodes."
   type = string
 }

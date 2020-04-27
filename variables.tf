@@ -21,15 +21,3 @@ variable "hosted_zone_url" {
   description = "URL of the hosted Zone created in Route53 before Terraform deployment."
   type = string
 }
-
-variable "keypair-name" {
-  default = "penr-oz"
-  description = "Name of the keypair declared in AWS IAM, used to connect into your instances via SSH."
-  type = string
-}
-
-variable "subnet_count" {
-  default = 2
-  description = "The number of subnets we want to create per type to ensure high availability."
-  type = string
-}

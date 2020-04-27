@@ -7,6 +7,7 @@ For further reference, please consider the following sections:
 * [Terraform EKS](https://learn.hashicorp.com/terraform/aws/eks-intro)
 * [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 * [Building AWS EKS using Terraform](https://www.esentri.com/building-a-kubernetes-cluster-on-aws-eks-using-terraform/)
+* [Provision EKS Cluster using Terraform](https://learn.hashicorp.com/terraform/kubernetes/provision-eks-cluster)
 * [Creating AWS Cert using Terraform](https://www.azavea.com/blog/2018/07/16/provisioning-acm-certificates-on-aws-with-terraform/)
 
 ### Additional Links
@@ -18,6 +19,8 @@ These additional references should also help you:
 * [jq](https://stedolan.github.io/jq/)
 * [Subdomain in Route53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/CreatingNewSubdomain.html#CreateZoneNewSubdomain)
 * [Define EC2 KeyPair](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)
+* [Troubleshoot Newly Creates EKS cluster](https://medium.com/@yocollab/terraform-creating-eks-cluster-f5f53ebd0f1b)
+* [EKS API Server Unauthorized](https://aws.amazon.com/premiumsupport/knowledge-center/eks-api-server-unauthorized-error/)
 
 ## Download and Installation
 * [Fork, Clone, or Download on GitHub](https://github.com/ozguramac/penr-oz-eks)

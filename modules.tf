@@ -1,17 +1,12 @@
 module "network" {
   source = "./modules/network"
-  aws_region = var.aws_region
   cluster-name = var.cluster-name
-  subnet_count = var.subnet_count
 }
 
 module "eks" {
   source = "./modules/eks"
-  accessing_computer_ip = local.accessing_computer_ip
-  app_subnet_ids = module.network.app_subnet_ids
-  aws_region = var.aws_region
   cluster-name = var.cluster-name
-  keypair-name = var.keypair-name
+  subnet_ids = module.network.private_subnet_ids
   vpc_id = module.network.vpc_id
 }
 
@@ -28,9 +23,8 @@ module "alb" {
   cluster-name = var.cluster-name
   hosted_zone_id = var.hosted_zone_id
   hosted_zone_url = var.hosted_zone_url
-  gateway_subnet_ids = module.network.gateway_subnet_ids
   lb_certificate_arn = module.cert.arn
-  lb_target_group_arn = module.eks.target_group_arn
-  node_sg_id = module.eks.node_sg_id
+  subnet_ids = module.network.public_subnet_ids
   vpc_id = module.network.vpc_id
+  worker_sg_id = module.eks.worker_sg_id
 }
