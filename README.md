@@ -9,6 +9,11 @@ For further reference, please consider the following sections:
 * [Building AWS EKS using Terraform](https://www.esentri.com/building-a-kubernetes-cluster-on-aws-eks-using-terraform/)
 * [Provision EKS Cluster using Terraform](https://learn.hashicorp.com/terraform/kubernetes/provision-eks-cluster)
 * [Creating AWS Cert using Terraform](https://www.azavea.com/blog/2018/07/16/provisioning-acm-certificates-on-aws-with-terraform/)
+* [Terraform AWS VPC Module](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/2.28.0)
+* [Terraform AWS EKS Module](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/11.1.0)
+* [Terraform AWS ALB Module](https://registry.terraform.io/modules/terraform-aws-modules/alb/aws/5.0.0)
+* [Terraform AWS Security-Group Module](https://registry.terraform.io/modules/terraform-aws-modules/security-group/aws/3.8.0)
+* [Terraform AWS Autoscaling Module](https://registry.terraform.io/modules/terraform-aws-modules/autoscaling/aws/3.5.0)
 
 ### Additional Links
 These additional references should also help you:

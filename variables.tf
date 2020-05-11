@@ -1,5 +1,5 @@
 variable "cluster-name" {
-  default = "penr-oz-eks"
+  default = "penr-oz"
   description = "Name of the cluster"
   type = string
 }

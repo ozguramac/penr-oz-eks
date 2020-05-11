@@ -3,8 +3,8 @@ resource "aws_route53_record" "main" {
   name    = "*.api.${var.hosted_zone_url}"
   type    = "A"
   alias {
-    name                   = aws_alb.main-alb.dns_name
-    zone_id                = aws_alb.main-alb.zone_id
+    name                   = module.aws-alb.this_lb_dns_name
+    zone_id                = module.aws-alb.this_lb_zone_id
     evaluate_target_health = false
   }
 }

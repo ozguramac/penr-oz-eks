@@ -1,37 +1,21 @@
-resource "aws_security_group" "main-alb" {
-  name        = "${var.cluster-name}-alb-public"
-  description = "Security group allowing public traffic for the load balancer."
+module "aws-sg-https" {
+  source = "terraform-aws-modules/security-group/aws//modules/https-443"
+  version = "3.8.0"
+
+  name        = "${var.cluster-name}-sg-https"
+  description = "Security group with HTTPS ports open within VPC"
   vpc_id      = var.vpc_id
 
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = map(
-     "Name", "${var.cluster-name}-alb",
-     "kubernetes.io/cluster/${var.cluster-name}", "owned",
-    )
+  ingress_cidr_blocks = ["10.10.0.0/16"]
 }
 
-resource "aws_security_group_rule" "main-alb-public-https" {
-  description       = "Allow load balancer to communicate with public traffic securely."
-  cidr_blocks       = ["0.0.0.0/0"]
-  from_port         = 443
-  protocol          = "tcp"
-  security_group_id = aws_security_group.main-alb.id
-  to_port           = 443
-  type              = "ingress"
-}
+module "aws-sg-http" {
+  source = "terraform-aws-modules/security-group/aws//modules/http-80"
+  version = "3.8.0"
 
-resource "aws_security_group_rule" "main-alb-public-http" {
-  description       = "Allow load balancer to communicate with public traffic."
-  cidr_blocks       = ["0.0.0.0/0"]
-  from_port         = 80
-  protocol          = "tcp"
-  security_group_id = aws_security_group.main-alb.id
-  to_port           = 80
-  type              = "ingress"
+  name        = "${var.cluster-name}-sg-http"
+  description = "Security group with HTTP ports open within VPC"
+  vpc_id      = var.vpc_id
+
+  ingress_cidr_blocks = ["10.10.0.0/16"]
 }

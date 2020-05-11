@@ -1,45 +1,45 @@
-resource "aws_alb" "main-alb" {
-  name            = "${var.cluster-name}-alb"
-  subnets         = var.subnet_ids
-  security_groups = [var.worker_sg_id, aws_security_group.main-alb.id]
-  ip_address_type = "ipv4"
+module "aws-alb" {
+  source  = "terraform-aws-modules/alb/aws"
+  version = "5.0.0"
 
-  tags = map(
-     "Name", "${var.cluster-name}-alb",
-     "kubernetes.io/cluster/${var.cluster-name}", "owned",
-    )
-}
+  name = "${var.cluster-name}-alb"
 
-resource "aws_alb_listener" "main-alb" {
-  load_balancer_arn = aws_alb.main-alb.arn
-  port              = 80
-  protocol          = "HTTP"
-  default_action {
-    type          = "redirect"
-    redirect {
-      port        = "443"
-      protocol    = "HTTPS"
-      status_code = "HTTP_301"
+  load_balancer_type = "application"
+
+  vpc_id             = var.vpc_id
+  subnets            = var.subnet_ids
+  security_groups    = [
+    module.aws-sg-http.this_security_group_id,
+    module.aws-sg-https.this_security_group_id
+  ]
+
+  target_groups = [
+    {
+      name_prefix      = "main"
+      backend_protocol = "HTTP"
+      backend_port     = 80
+      target_type      = "instance"
     }
-  }
-}
+  ]
 
-resource "aws_lb_target_group" "main" {
-  name = "${var.cluster-name}-nodes"
-  port = 31742
-  protocol = "HTTP"
-  vpc_id = var.vpc_id
-  target_type = "instance"
-}
+  https_listeners = [
+    {
+      port               = 443
+      protocol           = "HTTPS"
+      certificate_arn    = var.lb_certificate_arn
+      target_group_index = 0
+    }
+  ]
 
-resource "aws_alb_listener" "main-alb-ssl" {
-  load_balancer_arn = aws_alb.main-alb.arn
-  port              = 443
-  protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-TLS-1-2-Ext-2018-06"
-  certificate_arn   = var.lb_certificate_arn
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.main.arn
+  http_tcp_listeners = [
+    {
+      port               = 80
+      protocol           = "HTTP"
+      target_group_index = 0
+    }
+  ]
+
+  tags = {
+    Environment = "main"
   }
 }
