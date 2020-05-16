@@ -15,7 +15,7 @@ module "aws-alb" {
 
   target_groups = [
     {
-      name_prefix      = "main"
+      name_prefix      = var.cluster-name
       backend_protocol = "HTTP"
       backend_port     = 80
       target_type      = "instance"
@@ -40,6 +40,7 @@ module "aws-alb" {
   ]
 
   tags = {
-    Environment = "main"
+    Environment = "main",
+    Project = var.cluster-name
   }
 }
