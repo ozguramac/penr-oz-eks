@@ -24,4 +24,6 @@ module "aws-eks" {
       additional_security_group_ids = [aws_security_group.worker.id]
     },
   ]
+
+  enable_irsa = true
 }
