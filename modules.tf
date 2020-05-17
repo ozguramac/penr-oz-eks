@@ -12,9 +12,8 @@ module "eks" {
 
 module "cert" {
   source = "./modules/cert"
-  aws_region = var.aws_region
   domain_name = var.hosted_zone_url
-  hosted_zone_id = var.hosted_zone_id
+  zone_id = var.hosted_zone_id
   subject_alternative_names = ["*.${var.hosted_zone_url}"]
 }
 

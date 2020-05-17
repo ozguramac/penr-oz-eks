@@ -1,3 +1,3 @@
 output "arn" {
-  value = aws_acm_certificate_validation.default.certificate_arn
+  value = module.aws-acm.this_acm_certificate_arn
 }
