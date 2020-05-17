@@ -14,16 +14,16 @@ module "aws-vpc" {
   enable_dns_hostnames = true
 
   tags = {
-    "kubernetes.io/cluster/${var.cluster-name}" = "shared"
+    "kubernetes.io/cluster/${var.cluster-name}-eks" = "shared"
   }
 
   public_subnet_tags = {
-    "kubernetes.io/cluster/${var.cluster-name}" = "shared"
+    "kubernetes.io/cluster/${var.cluster-name}-eks" = "shared"
     "kubernetes.io/role/elb"                      = "1"
   }
 
   private_subnet_tags = {
-    "kubernetes.io/cluster/${var.cluster-name}" = "shared"
+    "kubernetes.io/cluster/${var.cluster-name}-eks" = "shared"
     "kubernetes.io/role/internal-elb"             = "1"
   }
 }
