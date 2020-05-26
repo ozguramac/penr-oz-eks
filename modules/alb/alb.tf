@@ -9,8 +9,7 @@ module "aws-alb" {
   vpc_id             = var.vpc_id
   subnets            = var.subnet_ids
   security_groups    = [
-    module.aws-sg-http.this_security_group_id,
-    module.aws-sg-https.this_security_group_id
+    module.aws-sg-http.this_security_group_id
   ]
 
   target_groups = [
@@ -19,15 +18,6 @@ module "aws-alb" {
       backend_protocol = "HTTP"
       backend_port     = 80
       target_type      = "instance"
-    }
-  ]
-
-  https_listeners = [
-    {
-      port               = 443
-      protocol           = "HTTPS"
-      certificate_arn    = var.lb_certificate_arn
-      target_group_index = 0
     }
   ]
 
