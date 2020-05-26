@@ -13,7 +13,9 @@ For further reference, please consider the following sections:
 * [Terraform AWS EKS Module](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/11.1.0)
 * [Terraform AWS ALB Module](https://registry.terraform.io/modules/terraform-aws-modules/alb/aws/5.0.0)
 * [Terraform AWS Security-Group Module](https://registry.terraform.io/modules/terraform-aws-modules/security-group/aws/3.8.0)
-* [Terraform AWS Autoscaling Module](https://registry.terraform.io/modules/terraform-aws-modules/autoscaling/aws/3.5.0)
+* [Terraform AWS ACM Cert Module](https://registry.terraform.io/modules/terraform-aws-modules/acm/aws/2.5.0)
+* [Terraform AWS ALB Ingress Controller](https://registry.terraform.io/modules/iplabs/alb-ingress-controller/kubernetes/3.2.0)
+* [Kubernetes External DNS](https://github.com/kubernetes-sigs/external-dns/releases/tag/v0.5.15)
 
 ### Additional Links
 These additional references should also help you:
@@ -42,6 +44,14 @@ $ terraform plan
 ```
 $ terraform apply
 ```
+Known issue first `apply` run will fail with multiple errors like this one:
+```
+Error: Post "https://xxxxxxxxxxxxx.eks.amazonaws.com/api/v1/namespaces/kube-system/configmaps": dial tcp: lookup
+ xxxxxxxxxxxxxxxx.eks.amazonaws.com on 127.0.1.1:53: no such host
+```
+follow it with `$ terraform output kubeconfig > ~/.kube/config`
+and then a subsequent `$ terraform apply` will start reaching the cluster
+
 ### Who do I talk to? ###
 * Repo owner or [admin](mailto:info@derinworksllc.com) 
 
